@@ -17,7 +17,6 @@ import java.net.URL;
 
 import bradley4.gmail.com.popularmovies.adapter.ImageAdapter;
 import bradley4.gmail.com.popularmovies.model.MovieItem;
-import bradley4.gmail.com.popularmovies.R;
 
 public class FetchMovieTask extends AsyncTask<Void, Void, MovieItem[]> {
 
@@ -120,25 +119,6 @@ public class FetchMovieTask extends AsyncTask<Void, Void, MovieItem[]> {
 
     @Override
     protected void onPostExecute(MovieItem[] result) {
-
-
         mGridView.setAdapter(new ImageAdapter(mContext, result));
-
-
     }
-
-    // references to our images
-    private Integer[] mThumbIds = {
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7,
-            R.drawable.sample_0, R.drawable.sample_1,
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7,
-            R.drawable.sample_0, R.drawable.sample_1,
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7
-    };
 }

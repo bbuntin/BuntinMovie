@@ -2,16 +2,17 @@ package bradley4.gmail.com.popularmovies.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+
+import com.squareup.picasso.Picasso;
 
 import java.net.URL;
 
-import bradley4.gmail.com.popularmovies.R;
 import bradley4.gmail.com.popularmovies.model.MovieItem;
 
 /**
@@ -27,7 +28,7 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        return mThumbIds.length;
+        return mMovieItem.length;
     }
 
     public Object getItem(int position) {
@@ -44,22 +45,18 @@ public class ImageAdapter extends BaseAdapter {
         if (convertView == null) {
             // if it's not recycled, initialize some attributes
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
+            imageView.setLayoutParams(new GridView.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 800));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
         } else {
             imageView = (ImageView) convertView;
         }
 
-
-
         try {
             Bitmap mIcon_val;
-            URL newurl = new URL("http://image.tmdb.org/t/p/w185//" + mMovieItem[position].getPoster_path());
+            String MOVIE_DOMAIN = "http://image.tmdb.org/t/p/w185//";
+            URL newurl = new URL(MOVIE_DOMAIN + mMovieItem[position].getPoster_path());
             //http://www.image-ny.com/9700-large_default/dunk-high-prm-sh-send-help-2.jpg
-            mIcon_val = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
-            imageView.setImageBitmap(mIcon_val);
-            //imageView.setImageResource(mIcon_val);
+            Picasso.with(mContext).load(newurl.toString()).into(imageView);
 
         } catch(Exception e){
 
@@ -67,19 +64,4 @@ public class ImageAdapter extends BaseAdapter {
 
         return imageView;
     }
-
-    // references to our images
-    private Integer[] mThumbIds = {
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7,
-            R.drawable.sample_0, R.drawable.sample_1,
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7,
-            R.drawable.sample_0, R.drawable.sample_1,
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7
-    };
 }

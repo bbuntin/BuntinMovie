@@ -21,9 +21,9 @@ public class ImageAdapter extends BaseAdapter {
     private Context mContext;
     private MovieItem[] mMovieItem;
 
-    public ImageAdapter(Context c, MovieItem[] movieItem) {
+    public ImageAdapter(Context c, MovieItem[] result) {
         mContext = c;
-        mMovieItem = movieItem;
+        mMovieItem = result;
     }
 
     public int getCount() {
@@ -51,11 +51,16 @@ public class ImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-        Bitmap mIcon_val;
+
+
         try {
+            Bitmap mIcon_val;
             URL newurl = new URL("http://image.tmdb.org/t/p/w185//" + mMovieItem[position].getPoster_path());
+            //http://www.image-ny.com/9700-large_default/dunk-high-prm-sh-send-help-2.jpg
             mIcon_val = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
             imageView.setImageBitmap(mIcon_val);
+            //imageView.setImageResource(mIcon_val);
+
         } catch(Exception e){
 
         }

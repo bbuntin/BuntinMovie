@@ -1,7 +1,9 @@
 package bradley4.gmail.com.popularmovies;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import bradley4.gmail.com.popularmovies.business.FetchMovieTask;
 
@@ -38,7 +39,7 @@ public class MainActivityFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id){
-                Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
+
             }
         });
 

@@ -18,7 +18,7 @@
         android:paddingLeft="15dp"
         android:id="@+id/textView"
         android:layout_weight="0.02"
-        android:gravity="fill_vertical" />
+         />
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -21,6 +21,7 @@ import bradley4.gmail.com.popularmovies.business.FetchMovieTask;
 public class MainActivityFragment extends Fragment {
 
     public GridView gridView;
+
     public MainActivityFragment() {
     }
 

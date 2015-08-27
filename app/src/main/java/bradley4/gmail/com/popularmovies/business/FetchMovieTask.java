@@ -18,7 +18,7 @@ import java.net.URL;
 import bradley4.gmail.com.popularmovies.adapter.ImageAdapter;
 import bradley4.gmail.com.popularmovies.model.MovieItem;
 
-public class FetchMovieTask extends AsyncTask<Void, Void, MovieItem[]> {
+public class FetchMovieTask extends AsyncTask<String, Void, MovieItem[]> {
 
     private final String LOG_TAG = FetchMovieTask.class.getSimpleName();
     Context mContext;
@@ -31,7 +31,7 @@ public class FetchMovieTask extends AsyncTask<Void, Void, MovieItem[]> {
     }
 
     @Override
-    protected MovieItem[] doInBackground(Void... params) {
+    protected MovieItem[] doInBackground(String... params) {
         // These two need to be declared outside the try/catch
         // so that they can be closed in the finally block.
         HttpURLConnection urlConnection = null;
@@ -50,7 +50,7 @@ public class FetchMovieTask extends AsyncTask<Void, Void, MovieItem[]> {
             final String API_KEY = "api_key";
             final String API_KEY_VALUE = "460ad9e6a622c1e1ff1552540628b972";
 
-            String sort_by = "popularity.desc";
+            String sort_by = params[0];
 
             int numDays = 7;
 

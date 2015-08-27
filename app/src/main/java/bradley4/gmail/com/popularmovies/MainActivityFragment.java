@@ -20,7 +20,9 @@ import bradley4.gmail.com.popularmovies.business.FetchMovieTask;
  */
 public class MainActivityFragment extends Fragment {
 
-    public GridView gridView;
+    public GridView mGridView;
+    public String mSortBy = "vote_average.desc"; //"popularity.desc";
+
 
     public MainActivityFragment() {
     }
@@ -31,15 +33,16 @@ public class MainActivityFragment extends Fragment {
 
         setHasOptionsMenu(true);
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        gridView = (GridView) rootView.findViewById(R.id.gridview);
-        FetchMovieTask movieTask = new FetchMovieTask(getActivity(),gridView);
-        movieTask.execute();
+        mGridView = (GridView) rootView.findViewById(R.id.gridview);
+
+        FetchMovieTask movieTask = new FetchMovieTask(getActivity(), mGridView);
+        movieTask.execute(mSortBy);
 
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id){
-                Intent intent = new Intent(getActivity(),MovieDetail.class);
+                                    int position, long id) {
+                Intent intent = new Intent(getActivity(), MovieDetail.class);
                 startActivity(intent);
             }
         });

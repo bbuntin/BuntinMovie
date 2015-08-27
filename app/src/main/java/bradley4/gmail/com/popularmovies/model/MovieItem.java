@@ -1,9 +1,11 @@
 package bradley4.gmail.com.popularmovies.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Bradley on 7/28/15.
  */
-public class MovieItem {
+public class MovieItem implements Serializable {
     private String mAdult;
     private String mBackdrop_path;
     private String mGenre_ids;

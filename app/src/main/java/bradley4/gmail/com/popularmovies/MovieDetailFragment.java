@@ -1,12 +1,16 @@
 package bradley4.gmail.com.popularmovies;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import bradley4.gmail.com.popularmovies.model.MovieItem;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +21,14 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class MovieDetailFragment extends Fragment {
+    private MovieItem mMovieItem;
+    private TextView mTitle;
+    private TextView mDate;
+    private TextView mPopularity;
+    private TextView mRating;
+    private TextView mOverview;
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -57,13 +69,29 @@ public class MovieDetailFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        Intent intent = getActivity().getIntent();
+        mMovieItem = (MovieItem) intent.getSerializableExtra(Constant.DETAIL_INTENT);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_movie_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_movie_detail, container, false);
+        mTitle = (TextView) view.findViewById(R.id.textTitle);
+        mDate = (TextView) view.findViewById(R.id.textDate);
+        mPopularity = (TextView) view.findViewById(R.id.textPopularity);
+        mRating = (TextView) view.findViewById(R.id.textRating);
+        mOverview = (TextView) view.findViewById(R.id.textOverview);
+
+        mTitle.setText(mMovieItem.getTitle());
+        mDate.setText(mMovieItem.getRelease_date());
+        mPopularity.setText(mMovieItem.getPopularity());
+        mRating.setText(mMovieItem.getVote_count());
+        mOverview.setText(mMovieItem.getOverview());
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -1,9 +1,12 @@
 package bradley4.gmail.com.popularmovies.business;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import org.json.JSONException;
@@ -15,6 +18,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import bradley4.gmail.com.popularmovies.Constant;
+import bradley4.gmail.com.popularmovies.MovieDetail;
 import bradley4.gmail.com.popularmovies.adapter.ImageAdapter;
 import bradley4.gmail.com.popularmovies.model.MovieItem;
 
@@ -118,7 +123,17 @@ public class FetchMovieTask extends AsyncTask<String, Void, MovieItem[]> {
     }
 
     @Override
-    protected void onPostExecute(MovieItem[] result) {
+    protected void onPostExecute(final MovieItem[] result) {
         mGridView.setAdapter(new ImageAdapter(mContext, result));
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                Intent intent = new Intent(mContext, MovieDetail.class);
+                MovieItem movieItem = result[position];
+                intent.putExtra(Constant.DETAIL_INTENT,movieItem);
+                mContext.startActivity(intent);
+            }
+        });
     }
 }

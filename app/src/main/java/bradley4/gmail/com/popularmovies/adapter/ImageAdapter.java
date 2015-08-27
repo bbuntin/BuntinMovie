@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import java.net.URL;
 
+import bradley4.gmail.com.popularmovies.Constant;
 import bradley4.gmail.com.popularmovies.model.MovieItem;
 
 /**
@@ -53,9 +54,7 @@ public class ImageAdapter extends BaseAdapter {
 
         try {
             Bitmap mIcon_val;
-            String MOVIE_DOMAIN = "http://image.tmdb.org/t/p/w185//";
-            URL newurl = new URL(MOVIE_DOMAIN + mMovieItem[position].getPoster_path());
-            //http://www.image-ny.com/9700-large_default/dunk-high-prm-sh-send-help-2.jpg
+            URL newurl = new URL(Constant.MOVIE_DOMAIN + mMovieItem[position].getPoster_path());
             Picasso.with(mContext).load(newurl.toString()).into(imageView);
 
         } catch(Exception e){

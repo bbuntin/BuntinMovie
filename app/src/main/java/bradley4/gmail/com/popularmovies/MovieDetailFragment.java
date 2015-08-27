@@ -8,7 +8,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import bradley4.gmail.com.popularmovies.model.MovieItem;
 
@@ -27,6 +33,7 @@ public class MovieDetailFragment extends Fragment {
     private TextView mPopularity;
     private TextView mRating;
     private TextView mOverview;
+    private ImageView mPosterImage;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -85,12 +92,19 @@ public class MovieDetailFragment extends Fragment {
         mPopularity = (TextView) view.findViewById(R.id.textPopularity);
         mRating = (TextView) view.findViewById(R.id.textRating);
         mOverview = (TextView) view.findViewById(R.id.textOverview);
+        mPosterImage = (ImageView) view.findViewById(R.id.imageViewPoster);
 
         mTitle.setText(mMovieItem.getTitle());
         mDate.setText(mMovieItem.getRelease_date());
         mPopularity.setText(mMovieItem.getPopularity());
         mRating.setText(mMovieItem.getVote_count());
         mOverview.setText(mMovieItem.getOverview());
+        try {
+            URL newurl = new URL(Constant.MOVIE_DOMAIN + mMovieItem.getPoster_path());
+            Picasso.with(getActivity()).load(newurl.toString()).into(mPosterImage);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         return view;
     }
 

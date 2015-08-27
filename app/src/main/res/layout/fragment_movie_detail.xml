@@ -9,16 +9,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
         android:textColor="@android:color/white"
-        android:background="#ffff4123"
-        android:textSize="45dp"
-        android:paddingBottom="15dp"
-        android:paddingTop="15dp"
+        android:background="#cb92b08f"
+        android:textSize="35dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
         android:paddingLeft="15dp"
         android:id="@+id/textTitle"
         android:layout_weight="0.02"
-         />
+        android:text="Large Text"
+        android:singleLine="true"
+        android:shadowColor="#fffd9eff" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,7 +30,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView"
+            android:id="@+id/imageViewPoster"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -40,7 +41,8 @@
             android:layout_marginLeft="40dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="40dp"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="20dp"
+            android:focusable="false" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -49,8 +51,8 @@
             android:text="Medium Text"
             android:id="@+id/textPopularity"
             android:layout_below="@+id/textDate"
-            android:layout_toRightOf="@+id/imageView"
-            android:layout_toEndOf="@+id/imageView" />
+            android:layout_toRightOf="@+id/imageViewPoster"
+            android:layout_toEndOf="@+id/imageViewPoster" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -58,9 +60,9 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
             android:id="@+id/textDate"
-            android:layout_alignTop="@+id/imageView"
-            android:layout_toRightOf="@+id/imageView"
-            android:layout_toEndOf="@+id/imageView" />
+            android:layout_alignTop="@+id/imageViewPoster"
+            android:layout_toRightOf="@+id/imageViewPoster"
+            android:layout_toEndOf="@+id/imageViewPoster" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -69,8 +71,8 @@
             android:text="Small Text"
             android:id="@+id/textRating"
             android:layout_below="@+id/textPopularity"
-            android:layout_toRightOf="@+id/imageView"
-            android:layout_toEndOf="@+id/imageView" />
+            android:layout_toRightOf="@+id/imageViewPoster"
+            android:layout_toEndOf="@+id/imageViewPoster" />
     </RelativeLayout>
 
     <TextView
@@ -79,7 +81,12 @@
         android:text="New Text"
         android:id="@+id/textOverview"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.14" />
+        android:layout_weight="0.14"
+        android:singleLine="false"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp" />
 
 
 </LinearLayout>

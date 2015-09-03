@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+    <item android:id="@+id/order_by_popular"
+        android:title="@string/action_most_popluar"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_by_rating"
+        android:title="@string/action_highest_rating"
+        app:showAsAction="never" />
+</menu>

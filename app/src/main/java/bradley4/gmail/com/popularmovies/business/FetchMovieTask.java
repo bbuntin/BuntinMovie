@@ -1,5 +1,6 @@
 package bradley4.gmail.com.popularmovies.business;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -26,13 +27,23 @@ import bradley4.gmail.com.popularmovies.model.MovieItem;
 public class FetchMovieTask extends AsyncTask<String, Void, MovieItem[]> {
 
     private final String LOG_TAG = FetchMovieTask.class.getSimpleName();
-    Context mContext;
-    GridView mGridView;
+    public Context mContext;
+    public GridView mGridView;
+    public ProgressDialog mProgressDialog;
 
 
     public FetchMovieTask(Context context,GridView gridView){
         this.mContext = context;
         this.mGridView = gridView;
+        mProgressDialog = new ProgressDialog(mContext);
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        mProgressDialog.setMessage(Constant.GETTING_MOVIES);
+       // mProgressDialog.show(); //comment out for now. Only shows for a split second and looks odd
+
     }
 
     @Override
@@ -131,9 +142,10 @@ public class FetchMovieTask extends AsyncTask<String, Void, MovieItem[]> {
                                     int position, long id) {
                 Intent intent = new Intent(mContext, MovieDetail.class);
                 MovieItem movieItem = result[position];
-                intent.putExtra(Constant.DETAIL_INTENT,movieItem);
+                intent.putExtra(Constant.DETAIL_INTENT, movieItem);
                 mContext.startActivity(intent);
             }
         });
+        //mProgressDialog.dismiss();
     }
 }

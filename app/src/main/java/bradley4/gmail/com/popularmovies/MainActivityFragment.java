@@ -19,8 +19,6 @@ import bradley4.gmail.com.popularmovies.business.FetchMovieTask;
 public class MainActivityFragment extends Fragment {
 
     public GridView mGridView;
-    public String mSortBy = "popularity.desc"; //"vote_average.desc"; //"popularity.desc";
-
 
     public MainActivityFragment() {
     }

@@ -33,8 +33,7 @@ public class MainActivityFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         mGridView = (GridView) rootView.findViewById(R.id.gridview);
 
-        FetchMovieTask movieTask = new FetchMovieTask(getActivity(), mGridView);
-        movieTask.execute(mSortBy);
+        fetchMovieTask(Constant.SORT_BY_POPULARITY);
 
         return rootView;
     }
@@ -52,13 +51,22 @@ public class MainActivityFragment extends Fragment {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        /*if (id == R.id.action_refresh) {
-            FetchMovieTask movieTask = new FetchMovieTask(mMovieItem);
-            movieTask.execute();
-            return true;
-        }*/
+        if (id == R.id.action_by_rating) {
+            fetchMovieTask(Constant.SORT_BY_RATING);
+
+        }
+
+        if (id == R.id.order_by_popular) {
+            fetchMovieTask(Constant.SORT_BY_POPULARITY);
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void fetchMovieTask(String sortBy) {
+        FetchMovieTask movieTask = new FetchMovieTask(getActivity(), mGridView);
+        movieTask.execute(sortBy);
     }
 }
 

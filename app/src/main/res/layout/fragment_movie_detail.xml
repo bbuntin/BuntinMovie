@@ -61,7 +61,7 @@
                 android:layout_below="@+id/textDate"
                 android:layout_toRightOf="@+id/imageViewPoster"
                 android:layout_toEndOf="@+id/imageViewPoster"
-                android:textSize="10dp" />
+                android:textSize="16dp" />
 
             <TextView
                 android:layout_width="wrap_content"

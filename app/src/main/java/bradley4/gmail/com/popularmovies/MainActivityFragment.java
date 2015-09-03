@@ -26,13 +26,10 @@ public class MainActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         setHasOptionsMenu(true);
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         mGridView = (GridView) rootView.findViewById(R.id.gridview);
-
         fetchMovieTask(Constant.SORT_BY_POPULARITY);
-
         return rootView;
     }
 

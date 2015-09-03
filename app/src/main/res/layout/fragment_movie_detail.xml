@@ -16,7 +16,6 @@
         android:paddingTop="10dp"
         android:paddingLeft="15dp"
         android:id="@+id/textTitle"
-        android:layout_weight="0.02"
         android:text="Large Text"
         android:singleLine="true"
         android:shadowColor="#fffd9eff" />
@@ -24,8 +23,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.09">
+        android:layout_gravity="center_horizontal">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -47,46 +45,52 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/textPopularity"
+            android:text="Rating"
+            android:id="@+id/textRating"
             android:layout_below="@+id/textDate"
             android:layout_toRightOf="@+id/imageViewPoster"
-            android:layout_toEndOf="@+id/imageViewPoster" />
+            android:layout_toEndOf="@+id/imageViewPoster"
+            android:textSize="10dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text="Year"
             android:id="@+id/textDate"
             android:layout_alignTop="@+id/imageViewPoster"
             android:layout_toRightOf="@+id/imageViewPoster"
-            android:layout_toEndOf="@+id/imageViewPoster" />
+            android:layout_toEndOf="@+id/imageViewPoster"
+            android:textSize="28dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Small Text"
-            android:id="@+id/textRating"
-            android:layout_below="@+id/textPopularity"
-            android:layout_toRightOf="@+id/imageViewPoster"
-            android:layout_toEndOf="@+id/imageViewPoster" />
     </RelativeLayout>
-
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="300dp"
-        android:text="New Text"
-        android:id="@+id/textOverview"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.14"
-        android:singleLine="false"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="5dp" />
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Overview"
+        android:id="@+id/textView"
+        android:paddingTop="2dp"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"/>
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        >
 
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Overview"
+            android:id="@+id/textOverview"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:singleLine="false"
+            android:paddingLeft="8dp"
+            android:paddingTop="0dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="0dp" />
+
+    </ScrollView>
 </LinearLayout>

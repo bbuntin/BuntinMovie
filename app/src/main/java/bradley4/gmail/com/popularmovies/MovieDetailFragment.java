@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,6 @@ public class MovieDetailFragment extends Fragment {
     private MovieItem mMovieItem;
     private TextView mTitle;
     private TextView mDate;
-    private TextView mPopularity;
     private TextView mRating;
     private TextView mOverview;
     private ImageView mPosterImage;
@@ -89,15 +89,20 @@ public class MovieDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_movie_detail, container, false);
         mTitle = (TextView) view.findViewById(R.id.textTitle);
         mDate = (TextView) view.findViewById(R.id.textDate);
-        mPopularity = (TextView) view.findViewById(R.id.textPopularity);
         mRating = (TextView) view.findViewById(R.id.textRating);
         mOverview = (TextView) view.findViewById(R.id.textOverview);
         mPosterImage = (ImageView) view.findViewById(R.id.imageViewPoster);
 
         mTitle.setText(mMovieItem.getTitle());
-        mDate.setText(mMovieItem.getRelease_date());
-        mPopularity.setText(mMovieItem.getPopularity());
-        mRating.setText(mMovieItem.getVote_count());
+        try{
+            String[] movieDate = mMovieItem.getRelease_date().split("-");
+            double d = Double.parseDouble(movieDate[0]); //making sure date is numeric
+            mDate.setText(movieDate[0]);
+        }catch(Exception e){
+            Log.e(Constant.LOG_TAG_NAME, e.getLocalizedMessage());
+        }
+
+        mRating.setText(String.format("%s/10 (%,d votes)", mMovieItem.getVote_average(), Integer.parseInt(mMovieItem.getVote_count())));
         mOverview.setText(mMovieItem.getOverview());
         try {
             URL newurl = new URL(Constant.MOVIE_DOMAIN + mMovieItem.getPoster_path());

@@ -10,5 +10,6 @@ public class Constant {
     public static final String SORT_BY_POPULARITY = "popularity.desc";
     public static final String SORT_BY_RATING = "vote_average.desc";
     public static final String GETTING_MOVIES = "Getting Movies...";
+    public static final String PLEASE_CONNECT = "Please connect to internet.";
 
 }

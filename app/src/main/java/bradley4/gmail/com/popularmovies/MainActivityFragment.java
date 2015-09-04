@@ -1,6 +1,9 @@
 package bradley4.gmail.com.popularmovies;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -9,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import bradley4.gmail.com.popularmovies.business.FetchMovieTask;
 
@@ -60,8 +64,20 @@ public class MainActivityFragment extends Fragment {
 
 
     public void fetchMovieTask(String sortBy) {
-        FetchMovieTask movieTask = new FetchMovieTask(getActivity(), mGridView);
-        movieTask.execute(sortBy);
+
+        ConnectivityManager cm =
+                (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        if (isConnected) {
+            FetchMovieTask movieTask = new FetchMovieTask(getActivity(), mGridView);
+            movieTask.execute(sortBy);
+        }else{
+            Toast toast = Toast.makeText(getActivity(), Constant.PLEASE_CONNECT, Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 }
 

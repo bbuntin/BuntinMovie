@@ -7,15 +7,14 @@
     <ScrollView
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/scrollView">
+    android:id="@+id/scrollView"
+        >
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical"
             >
-
-
 
         <TextView
             android:layout_width="match_parent"
@@ -29,12 +28,12 @@
             android:paddingLeft="15dp"
             android:id="@+id/textTitle"
             android:text="Large Text"
-            android:singleLine="true" />
+            android:singleLine="true"
+            />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_gravity="center_horizontal">
+            android:layout_height="180dp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -51,7 +50,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginBottom="20dp"
-                android:focusable="false" />
+                android:focusable="false"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -61,7 +61,8 @@
                 android:layout_below="@+id/textDate"
                 android:layout_toRightOf="@+id/imageViewPoster"
                 android:layout_toEndOf="@+id/imageViewPoster"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -71,18 +72,20 @@
                 android:layout_alignTop="@+id/imageViewPoster"
                 android:layout_toRightOf="@+id/imageViewPoster"
                 android:layout_toEndOf="@+id/imageViewPoster"
-                android:textSize="28dp" />
+                android:textSize="28dp"
+                />
 
         </RelativeLayout>
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Overview"
-            android:id="@+id/textView"
-            android:paddingTop="2dp"
-            android:paddingRight="8dp"
-            android:paddingLeft="8dp"/>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Overview"
+                android:id="@+id/textView"
+                android:paddingTop="2dp"
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
+                />
 
             <TextView
                 android:layout_width="fill_parent"
@@ -95,7 +98,22 @@
                 android:paddingLeft="8dp"
                 android:paddingTop="0dp"
                 android:paddingRight="8dp"
-                android:paddingBottom="0dp" />
+                android:paddingBottom="0dp"
+                />
+
+            <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/listTrailers"
+                />
+            
+            <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/listReviews"
+                />
         </LinearLayout>
     </ScrollView>
-        </LinearLayout>
+
+
+ </LinearLayout>

@@ -6,6 +6,7 @@
     <fragment android:name="bradley4.gmail.com.popularmovies.MovieDetailFragment"
         android:id="@+id/main_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_movie_detail" />
 
 </RelativeLayout>

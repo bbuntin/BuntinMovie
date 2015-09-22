@@ -24,15 +24,15 @@ import bradley4.gmail.com.popularmovies.MovieDetail;
 import bradley4.gmail.com.popularmovies.adapter.ImageAdapter;
 import bradley4.gmail.com.popularmovies.model.MovieItem;
 
-public class FetchMovieTask extends AsyncTask<String, Void, MovieItem[]> {
+public class FetchMovieTrailerTask extends AsyncTask<String, Void, MovieItem[]> {
 
-    private final String LOG_TAG = FetchMovieTask.class.getSimpleName();
+    private final String LOG_TAG = FetchMovieTrailerTask.class.getSimpleName();
     public Context mContext;
     public GridView mGridView;
     public ProgressDialog mProgressDialog;
 
 
-    public FetchMovieTask(Context context,GridView gridView){
+    public FetchMovieTrailerTask(Context context, GridView gridView){
         this.mContext = context;
         this.mGridView = gridView;
         mProgressDialog = new ProgressDialog(mContext);
@@ -61,15 +61,13 @@ public class FetchMovieTask extends AsyncTask<String, Void, MovieItem[]> {
             // Possible parameters are available at OWM's forecast API page, at
             // http://openweathermap.org/API#forecast
 
-            final String MOVIE_BASE = "http://api.themoviedb.org/3/discover/movie?";
-            final String SORT_BY = "sort_by";
+            final String MOVIE_BASE = "http://api.themoviedb.org/3/movie/%s";
             final String API_KEY = "api_key";
             final String API_KEY_VALUE = "460ad9e6a622c1e1ff1552540628b972";
 
             String sort_by = params[0];
 
             Uri builtUri = Uri.parse(MOVIE_BASE).buildUpon()
-                    .appendQueryParameter(SORT_BY, sort_by)
                     .appendQueryParameter(API_KEY, API_KEY_VALUE)
             .build();
 

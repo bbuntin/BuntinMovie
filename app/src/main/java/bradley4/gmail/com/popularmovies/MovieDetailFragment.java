@@ -2,21 +2,27 @@ package bradley4.gmail.com.popularmovies;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import bradley4.gmail.com.popularmovies.business.FetchMovieTrailerTask;
 import bradley4.gmail.com.popularmovies.model.MovieItem;
 
 /**
@@ -34,6 +40,7 @@ public class MovieDetailFragment extends Fragment {
     private TextView mRating;
     private TextView mOverview;
     private ImageView mPosterImage;
+    public GridView mGridTrailerView;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -81,6 +88,8 @@ public class MovieDetailFragment extends Fragment {
         Intent intent = getActivity().getIntent();
         mMovieItem = (MovieItem) intent.getSerializableExtra(Constant.DETAIL_INTENT);
 
+
+
     }
 
     @Override
@@ -88,6 +97,8 @@ public class MovieDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_movie_detail, container, false);
+        mGridTrailerView = (GridView) view.findViewById(R.id.gridview);
+
         mTitle = (TextView) view.findViewById(R.id.textTitle);
         mDate = (TextView) view.findViewById(R.id.textDate);
         mRating = (TextView) view.findViewById(R.id.textRating);
@@ -111,7 +122,27 @@ public class MovieDetailFragment extends Fragment {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+
+        fetchMovieTrailerTask(mMovieItem.getID());
+
         return view;
+    }
+
+    public void fetchMovieTrailerTask(String movieID) {
+
+        ConnectivityManager cm =
+                (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        if (isConnected) {
+            FetchMovieTrailerTask movieTask = new FetchMovieTrailerTask(getActivity(), mGridTrailerView);
+            movieTask.execute(movieID);
+        }else{
+            Toast toast = Toast.makeText(getActivity(), Constant.PLEASE_CONNECT, Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

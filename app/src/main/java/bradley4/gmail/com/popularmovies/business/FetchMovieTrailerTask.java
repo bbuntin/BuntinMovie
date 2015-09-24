@@ -8,7 +8,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.GridView;
+import android.widget.ListView;
 
 import org.json.JSONException;
 
@@ -21,20 +21,20 @@ import java.net.URL;
 
 import bradley4.gmail.com.popularmovies.Constant;
 import bradley4.gmail.com.popularmovies.MovieDetail;
-import bradley4.gmail.com.popularmovies.adapter.ImageAdapter;
-import bradley4.gmail.com.popularmovies.model.MovieItem;
+import bradley4.gmail.com.popularmovies.adapter.TrailerAdapter;
+import bradley4.gmail.com.popularmovies.model.TrailerItem;
 
-public class FetchMovieTrailerTask extends AsyncTask<String, Void, MovieItem[]> {
+public class FetchMovieTrailerTask extends AsyncTask<String, Void, TrailerItem[]> {
 
     private final String LOG_TAG = FetchMovieTrailerTask.class.getSimpleName();
     public Context mContext;
-    public GridView mGridView;
+    public ListView mListView;
     public ProgressDialog mProgressDialog;
 
 
-    public FetchMovieTrailerTask(Context context, GridView gridView){
+    public FetchMovieTrailerTask(Context context, ListView listView){
         this.mContext = context;
-        this.mGridView = gridView;
+        this.mListView = listView;
         mProgressDialog = new ProgressDialog(mContext);
     }
 
@@ -47,12 +47,12 @@ public class FetchMovieTrailerTask extends AsyncTask<String, Void, MovieItem[]> 
     }
 
     @Override
-    protected MovieItem[] doInBackground(String... params) {
+    protected TrailerItem[] doInBackground(String... params) {
         // These two need to be declared outside the try/catch
         // so that they can be closed in the finally block.
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
-        MovieItem[] movies = null;
+        TrailerItem[] trailers = null;
 
         String movieJsonStr = null;
 
@@ -108,7 +108,7 @@ public class FetchMovieTrailerTask extends AsyncTask<String, Void, MovieItem[]> 
             }
             movieJsonStr = buffer.toString();
             try {
-                movies = MovieDBJsonParser.getParsedMovies(movieJsonStr);
+                trailers = MovieTrailerDBJsonParser.getParsedMovieTrailers(movieJsonStr);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -130,19 +130,19 @@ public class FetchMovieTrailerTask extends AsyncTask<String, Void, MovieItem[]> 
                 }
             }
         }
-        return movies;
+        return trailers;
     }
 
     @Override
-    protected void onPostExecute(final MovieItem[] result) {
-        mGridView.setAdapter(new ImageAdapter(mContext, result));
-        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    protected void onPostExecute(final TrailerItem[] result) {
+        mListView.setAdapter(new TrailerAdapter(mContext, result));
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
                 Intent intent = new Intent(mContext, MovieDetail.class);
-                MovieItem movieItem = result[position];
-                intent.putExtra(Constant.DETAIL_INTENT, movieItem);
+                TrailerItem trailerItem = result[position];
+                intent.putExtra(Constant.DETAIL_INTENT, trailerItem);
                 mContext.startActivity(intent);
             }
         });

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +41,7 @@ public class MovieDetailFragment extends Fragment {
     private TextView mRating;
     private TextView mOverview;
     private ImageView mPosterImage;
-    public GridView mGridTrailerView;
+    public ListView mGridTrailerView;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -97,7 +98,7 @@ public class MovieDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_movie_detail, container, false);
-        mGridTrailerView = (GridView) view.findViewById(R.id.gridview);
+        mGridTrailerView = (ListView) view.findViewById(R.id.listTrailers);
 
         mTitle = (TextView) view.findViewById(R.id.textTitle);
         mDate = (TextView) view.findViewById(R.id.textDate);

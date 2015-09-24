@@ -25,7 +25,7 @@ public class MovieTrailerDBJsonParser {
 
 
 
-    public static TrailerItem[] getParsedMovies(String jsonStr) throws JSONException {
+    public static TrailerItem[] getParsedMovieTrailers(String jsonStr) throws JSONException {
             JSONObject jsonObj = new JSONObject(jsonStr);
             JSONArray vidoes = jsonObj.getJSONArray(TAG_RESULTS);
             TrailerItem[] trailerItems;

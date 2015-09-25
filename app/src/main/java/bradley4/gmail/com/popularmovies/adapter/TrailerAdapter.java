@@ -1,49 +1,50 @@
 package bradley4.gmail.com.popularmovies.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
+import bradley4.gmail.com.popularmovies.R;
 import bradley4.gmail.com.popularmovies.model.TrailerItem;
 
 /**
  * Created by Bradley on 7/17/15.
  */
-public class TrailerAdapter extends BaseAdapter {
+public class TrailerAdapter extends ArrayAdapter<TrailerItem> {
     private Context mContext;
     private TrailerItem[] mTrailerItem;
 
-    public TrailerAdapter(Context c, TrailerItem[] result) {
+    public TrailerAdapter(Context c, TrailerItem[] values) {
+        super(c, -1, values);
         mContext = c;
-        mTrailerItem = result;
+        mTrailerItem = values;
     }
-
-    public int getCount() {
-        return mTrailerItem.length;
-    }
-
-    public Object getItem(int position) {
-        return null;
-    }
-
-    public long getItemId(int position) {
-        return 0;
-    }
-
-    // create a new ImageView for each item referenced by the Adapter
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LinearLayout linearLayout;
-        if (convertView == null) {
+        View row = convertView;
+        TrailerHolder holder = null;
+
+        if (row == null) {
             // if it's not recycled, initialize some attributes
-            linearLayout = new LinearLayout(mContext);
-            //imageView.setLayoutParams(new GridView.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 800));
-            //imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            LayoutInflater inflater = ((Activity)mContext).getLayoutInflater();
+            row = inflater.inflate(R.layout.list_item_trailers,parent,false);
+
+            holder = new TrailerHolder();
+            holder.txtTitle = (TextView)row.findViewById(R.id.text_trailer_title);
+            holder.txtTitle.setText(mTrailerItem[position].getmName());
+            row.setTag(holder);
         } else {
-            linearLayout = (LinearLayout) convertView;
+            holder = (TrailerHolder)row.getTag();
         }
 
-        return linearLayout;
+        return row;
+    }
+
+    static class TrailerHolder {
+        TextView txtTitle;
     }
 }

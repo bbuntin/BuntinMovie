@@ -12,10 +12,9 @@
         android:src="@mipmap/movie_play_blue"
         />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:layout_weight="1"
-        android:text="Trailer" />
+        android:text="Trailer"
+        android:id="@+id/text_trailer_title" />
 </LinearLayout>

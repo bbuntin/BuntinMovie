@@ -103,8 +103,11 @@
 
             <ListView
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/listTrailers"
+                android:minHeight="200dp"
+                android:nestedScrollingEnabled="true"
+                android:longClickable="false"
+                android:layout_height="200dip"
                 />
 
             <ListView

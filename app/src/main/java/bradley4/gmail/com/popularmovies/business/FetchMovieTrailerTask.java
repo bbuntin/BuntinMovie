@@ -20,7 +20,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import bradley4.gmail.com.popularmovies.Constant;
-import bradley4.gmail.com.popularmovies.MovieDetail;
 import bradley4.gmail.com.popularmovies.adapter.TrailerAdapter;
 import bradley4.gmail.com.popularmovies.model.TrailerItem;
 
@@ -140,10 +139,8 @@ public class FetchMovieTrailerTask extends AsyncTask<String, Void, TrailerItem[]
             @Override
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                Intent intent = new Intent(mContext, MovieDetail.class);
                 TrailerItem trailerItem = result[position];
-                intent.putExtra(Constant.DETAIL_INTENT, trailerItem);
-                mContext.startActivity(intent);
+                mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constant.YOUTUBE_URL + trailerItem.getmKey())));
             }
         });
         //mProgressDialog.dismiss();

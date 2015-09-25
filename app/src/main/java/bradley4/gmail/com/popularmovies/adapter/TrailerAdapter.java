@@ -39,6 +39,9 @@ public class TrailerAdapter extends ArrayAdapter<TrailerItem> {
             row.setTag(holder);
         } else {
             holder = (TrailerHolder)row.getTag();
+
+            holder.txtTitle.setText(mTrailerItem[position].getmName());
+
         }
 
         return row;

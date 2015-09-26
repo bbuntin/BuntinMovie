@@ -22,6 +22,7 @@ import com.squareup.picasso.Picasso;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import bradley4.gmail.com.popularmovies.business.FetchMovieReviewTask;
 import bradley4.gmail.com.popularmovies.business.FetchMovieTrailerTask;
 import bradley4.gmail.com.popularmovies.model.MovieItem;
 
@@ -124,6 +125,7 @@ public class MovieDetailFragment extends Fragment {
         }
 
         fetchMovieTrailerTask(mMovieItem.getID());
+        fetchMovieReviewTask(mMovieItem.getID());
 
         return view;
     }
@@ -138,6 +140,23 @@ public class MovieDetailFragment extends Fragment {
                 activeNetwork.isConnectedOrConnecting();
         if (isConnected) {
             FetchMovieTrailerTask movieTask = new FetchMovieTrailerTask(getActivity(), mGridTrailerView);
+            movieTask.execute(movieID);
+        }else{
+            Toast toast = Toast.makeText(getActivity(), Constant.PLEASE_CONNECT, Toast.LENGTH_LONG);
+            toast.show();
+        }
+    }
+
+    public void fetchMovieReviewTask(String movieID) {
+
+        ConnectivityManager cm =
+                (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        if (isConnected) {
+            FetchMovieReviewTask movieTask = new FetchMovieReviewTask(getActivity(), mGridTrailerView);
             movieTask.execute(movieID);
         }else{
             Toast toast = Toast.makeText(getActivity(), Constant.PLEASE_CONNECT, Toast.LENGTH_LONG);

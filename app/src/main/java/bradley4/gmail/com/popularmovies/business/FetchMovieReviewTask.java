@@ -2,12 +2,9 @@ package bradley4.gmail.com.popularmovies.business;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONException;
@@ -19,19 +16,18 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import bradley4.gmail.com.popularmovies.Constant;
-import bradley4.gmail.com.popularmovies.adapter.TrailerAdapter;
-import bradley4.gmail.com.popularmovies.model.TrailerItem;
+import bradley4.gmail.com.popularmovies.adapter.ReviewAdapter;
+import bradley4.gmail.com.popularmovies.model.ReviewItem;
 
-public class FetchMovieTrailerTask extends AsyncTask<String, Void, TrailerItem[]> {
+public class FetchMovieReviewTask extends AsyncTask<String, Void, ReviewItem[]> {
 
-    private final String LOG_TAG = FetchMovieTrailerTask.class.getSimpleName();
+    private final String LOG_TAG = FetchMovieReviewTask.class.getSimpleName();
     public Context mContext;
     public ListView mListView;
     public ProgressDialog mProgressDialog;
 
 
-    public FetchMovieTrailerTask(Context context, ListView listView){
+    public FetchMovieReviewTask(Context context, ListView listView){
         this.mContext = context;
         this.mListView = listView;
         mProgressDialog = new ProgressDialog(mContext);
@@ -46,12 +42,12 @@ public class FetchMovieTrailerTask extends AsyncTask<String, Void, TrailerItem[]
     }
 
     @Override
-    protected TrailerItem[] doInBackground(String... params) {
+    protected ReviewItem[] doInBackground(String... params) {
         // These two need to be declared outside the try/catch
         // so that they can be closed in the finally block.
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
-        TrailerItem[] trailers = null;
+        ReviewItem[] reviews = null;
 
         String movieJsonStr = null;
 
@@ -60,14 +56,14 @@ public class FetchMovieTrailerTask extends AsyncTask<String, Void, TrailerItem[]
             // Possible parameters are available at OWM's forecast API page, at
             // http://openweathermap.org/API#forecast
 
-            String movie_base_url = "http://api.themoviedb.org/3/movie/%s/videos?";
+            String movie_base_url = "http://api.themoviedb.org/3/movie/%s/reviews?";
             final String API_KEY = "api_key";
             final String API_KEY_VALUE = "460ad9e6a622c1e1ff1552540628b972";
 
             String movieID = params[0];
             movie_base_url = String.format(movie_base_url, movieID);
 
-
+            Log.i(LOG_TAG,movie_base_url.toString());
 
 
             Uri builtUri = Uri.parse(movie_base_url).buildUpon()
@@ -76,7 +72,7 @@ public class FetchMovieTrailerTask extends AsyncTask<String, Void, TrailerItem[]
 
             URL url = new URL(builtUri.toString());
 
-            Log.i(LOG_TAG,builtUri.toString());
+
 
             //Create the request to OpenWeatherMap, and open the connection
             urlConnection = (HttpURLConnection) url.openConnection();
@@ -107,7 +103,7 @@ public class FetchMovieTrailerTask extends AsyncTask<String, Void, TrailerItem[]
             }
             movieJsonStr = buffer.toString();
             try {
-                trailers = MovieTrailerDBJsonParser.getParsedMovieTrailers(movieJsonStr);
+                reviews = MovieReviewDBJsonParser.getParsedMovieReviews(movieJsonStr);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -129,20 +125,21 @@ public class FetchMovieTrailerTask extends AsyncTask<String, Void, TrailerItem[]
                 }
             }
         }
-        return trailers;
+        return reviews;
     }
 
     @Override
-    protected void onPostExecute(final TrailerItem[] result) {
-        mListView.setAdapter(new TrailerAdapter(mContext, result));
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    protected void onPostExecute(final ReviewItem[] result) {
+        mListView.setAdapter(new ReviewAdapter(mContext, result));
+        /**
+         * mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                TrailerItem trailerItem = result[position];
+                ReviewItem reviewItem = result[position];
                 mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constant.YOUTUBE_URL + trailerItem.getmKey())));
             }
-        });
+        });**/
         //mProgressDialog.dismiss();
     }
 }

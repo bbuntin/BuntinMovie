@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:id="@+id/imageView"
+        android:id="@+id/play_button_imageview"
         android:src="@mipmap/movie_play_blue"
         />
 
@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:text="Trailer"
-        android:id="@+id/text_trailer_title"
+        android:id="@+id/trailer_title_textview"
         android:gravity="center"
         android:layout_marginTop="5dp"
         android:textSize="14dp"

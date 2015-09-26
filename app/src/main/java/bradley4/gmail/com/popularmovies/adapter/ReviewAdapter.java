@@ -9,20 +9,22 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import bradley4.gmail.com.popularmovies.R;
+import bradley4.gmail.com.popularmovies.model.ReviewItem;
 import bradley4.gmail.com.popularmovies.model.TrailerItem;
 
 /**
  * Created by Bradley on 7/17/15.
  */
-public class TrailerAdapter extends ArrayAdapter<TrailerItem> {
+public class ReviewAdapter extends ArrayAdapter<ReviewItem> {
     private Context mContext;
-    private TrailerItem[] mTrailerItem;
+    private ReviewItem[] mReviewItem;
 
-    public TrailerAdapter(Context c, TrailerItem[] values) {
+    public ReviewAdapter(Context c, ReviewItem[] values) {
         super(c, -1, values);
         mContext = c;
-        mTrailerItem = values;
+        mReviewItem = values;
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
@@ -31,23 +33,27 @@ public class TrailerAdapter extends ArrayAdapter<TrailerItem> {
         if (row == null) {
             // if it's not recycled, initialize some attributes
             LayoutInflater inflater = ((Activity)mContext).getLayoutInflater();
-            row = inflater.inflate(R.layout.list_item_trailer,parent,false);
+            row = inflater.inflate(R.layout.list_item_review,parent,false);
 
             holder = new TrailerHolder();
-            holder.txtTitle = (TextView)row.findViewById(R.id.trailer_title_textview);
-            holder.txtTitle.setText(mTrailerItem[position].getmName());
+            holder.txtAuthor = (TextView)row.findViewById(R.id.author_textview);
+            holder.txtAuthor.setText(mReviewItem[position].getmAuthor());
+
+            holder.txtContent = (TextView)row.findViewById(R.id.content_textview);
+            holder.txtContent.setText(mReviewItem[position].getmContent());
+
             row.setTag(holder);
         } else {
             holder = (TrailerHolder)row.getTag();
-
-            holder.txtTitle.setText(mTrailerItem[position].getmName());
-
+            holder.txtAuthor.setText(mReviewItem[position].getmAuthor());
+            holder.txtContent.setText(mReviewItem[position].getmContent());
         }
 
         return row;
     }
 
     static class TrailerHolder {
-        TextView txtTitle;
+        TextView txtAuthor;
+        TextView txtContent;
     }
 }

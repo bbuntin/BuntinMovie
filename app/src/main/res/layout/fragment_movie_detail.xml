@@ -103,21 +103,23 @@
 
             <ListView
                 android:layout_width="fill_parent"
-                android:id="@+id/listTrailers"
-                android:minHeight="200dp"
+                android:layout_height="150dp"
+                android:id="@+id/trailers_listview"
                 android:nestedScrollingEnabled="true"
                 android:longClickable="false"
-                android:layout_height="200dip"
-                />
+                android:visibility="visible"
+                android:paddingLeft="8dp" />
 
             <ListView
                 android:layout_width="fill_parent"
-                android:id="@+id/listReviews"
-                android:minHeight="200dp"
+                android:layout_height="200dp"
+                android:id="@+id/reviews_listview"
                 android:nestedScrollingEnabled="true"
                 android:longClickable="false"
-                android:layout_height="200dip"
-                />
+                android:visibility="visible"
+                android:paddingLeft="8dp"
+                android:background="#e4e4e4"
+                android:layout_marginTop="5dp" />
 
         </LinearLayout>
     </ScrollView>

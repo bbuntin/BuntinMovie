@@ -42,6 +42,7 @@ public class MovieDetailFragment extends Fragment {
     private TextView mOverview;
     private ImageView mPosterImage;
     public ListView mGridTrailerView;
+    public ListView mGridReviewView;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -98,7 +99,8 @@ public class MovieDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_movie_detail, container, false);
-        mGridTrailerView = (ListView) view.findViewById(R.id.listTrailers);
+        mGridTrailerView = (ListView) view.findViewById(R.id.trailers_listview);
+        mGridReviewView = (ListView) view.findViewById(R.id.reviews_listview);
 
         mTitle = (TextView) view.findViewById(R.id.textTitle);
         mDate = (TextView) view.findViewById(R.id.textDate);
@@ -156,7 +158,7 @@ public class MovieDetailFragment extends Fragment {
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
         if (isConnected) {
-            FetchMovieReviewTask movieTask = new FetchMovieReviewTask(getActivity(), mGridTrailerView);
+            FetchMovieReviewTask movieTask = new FetchMovieReviewTask(getActivity(), mGridReviewView);
             movieTask.execute(movieID);
         }else{
             Toast toast = Toast.makeText(getActivity(), Constant.PLEASE_CONNECT, Toast.LENGTH_LONG);

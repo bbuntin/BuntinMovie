@@ -7,7 +7,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Author"
-        android:id="@+id/author_textview" />
+        android:id="@+id/author_textview"
+        android:textColor="#0435fa"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp" />
 
     <TextView
         android:layout_width="wrap_content"

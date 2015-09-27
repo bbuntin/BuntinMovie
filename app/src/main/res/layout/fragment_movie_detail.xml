@@ -75,17 +75,29 @@
                 android:textSize="28dp"
                 />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mark as Favorite"
+                android:id="@+id/favorite_button"
+                android:layout_below="@+id/textRating"
+                android:layout_toRightOf="@+id/imageViewPoster"
+                android:width="100dp"
+                android:visibility="visible"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentLeft="false" />
+
         </RelativeLayout>
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Overview"
                 android:id="@+id/textView"
                 android:paddingTop="2dp"
                 android:paddingRight="8dp"
                 android:paddingLeft="8dp"
-                />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="center_horizontal" />
 
             <TextView
                 android:layout_width="fill_parent"
@@ -99,7 +111,18 @@
                 android:paddingTop="0dp"
                 android:paddingRight="8dp"
                 android:paddingBottom="0dp"
-                />
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Trailers and Teasers"
+                android:id="@+id/trailer_header_textview"
+                android:paddingTop="2dp"
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="center_horizontal" />
 
             <ListView
                 android:layout_width="fill_parent"
@@ -108,7 +131,21 @@
                 android:nestedScrollingEnabled="true"
                 android:longClickable="false"
                 android:visibility="visible"
-                android:paddingLeft="8dp" />
+                android:paddingLeft="8dp"
+                android:scrollingCache="true"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Reviews"
+                android:id="@+id/reviews_textview"
+                android:paddingTop="2dp"
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="center_horizontal"
+                />
 
             <ListView
                 android:layout_width="fill_parent"

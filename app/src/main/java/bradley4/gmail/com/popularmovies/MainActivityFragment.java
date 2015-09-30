@@ -52,11 +52,14 @@ public class MainActivityFragment extends Fragment {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_by_rating) {
             fetchMovieTask(Constant.SORT_BY_RATING);
-
         }
 
         if (id == R.id.order_by_popular) {
             fetchMovieTask(Constant.SORT_BY_POPULARITY);
+        }
+
+        if (id == R.id.action_by_favorite){
+            fetchMovieTask(Constant.DISPLAY_FAVORITES);
         }
 
         return super.onOptionsItemSelected(item);

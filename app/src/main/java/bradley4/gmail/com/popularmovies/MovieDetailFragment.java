@@ -138,11 +138,12 @@ public class MovieDetailFragment extends Fragment {
 
         //favorite Section
         Context context = getActivity();
-        SharedPreferences sharedPref = context.getSharedPreferences(
+        final SharedPreferences sharedPref = context.getSharedPreferences(
                 getString(R.string.favorite_shared_preference), Context.MODE_PRIVATE);
 
-        Gson gson = new Gson();
-        String sharedPreferenceKey = getString(R.string.favorite_shared_preference_prefix) + mMovieItem.getID();
+        final Gson gson = new Gson();
+        final String sharedPreferenceKey = getString(R.string.favorite_shared_preference_prefix) + mMovieItem.getID();
+        final SharedPreferences.Editor prefsEditor = sharedPref.edit();
         String json = sharedPref.getString(sharedPreferenceKey, "");
 
         if (json == ""){
@@ -156,9 +157,13 @@ public class MovieDetailFragment extends Fragment {
             public void onClick(View view) {
                 if (mFavoriteButton.getText() == getString(R.string.favorite_button_mark)){
                     mFavoriteButton.setText(getString(R.string.favorite_button_unmark));
-
+                    String json = gson.toJson(mMovieItem);
+                    prefsEditor.putString(sharedPreferenceKey, json);
+                    prefsEditor.commit();
                 }else{
                     mFavoriteButton.setText(getString(R.string.favorite_button_mark));
+                    prefsEditor.remove(sharedPreferenceKey);
+                    prefsEditor.commit();
                 }
             }
         });

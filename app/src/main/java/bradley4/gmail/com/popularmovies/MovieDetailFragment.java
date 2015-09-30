@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.net.MalformedURLException;
@@ -140,10 +141,27 @@ public class MovieDetailFragment extends Fragment {
         SharedPreferences sharedPref = context.getSharedPreferences(
                 getString(R.string.favorite_shared_preference), Context.MODE_PRIVATE);
 
-        int defaultValue = getResources().getInteger();
-        long highScore = sharedPref.getClass();
-        //(getString(R.string.saved_high_score), defaultValue);
+        Gson gson = new Gson();
+        String sharedPreferenceKey = getString(R.string.favorite_shared_preference_prefix) + mMovieItem.getID();
+        String json = sharedPref.getString(sharedPreferenceKey, "");
 
+        if (json == ""){
+            mFavoriteButton.setText(getString(R.string.favorite_button_mark));
+        }else{
+            mFavoriteButton.setText(getString(R.string.favorite_button_unmark));
+        }
+
+        mFavoriteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mFavoriteButton.getText() == getString(R.string.favorite_button_mark)){
+                    mFavoriteButton.setText(getString(R.string.favorite_button_unmark));
+
+                }else{
+                    mFavoriteButton.setText(getString(R.string.favorite_button_mark));
+                }
+            }
+        });
 
         return view;
     }

@@ -10,4 +10,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_movie_detail">MovieDetail</string>
+
+    <string name="favorite_shared_preference">bradley4.gmail.com.popularmovies.shared_preferences_favorite</string>
 </resources>

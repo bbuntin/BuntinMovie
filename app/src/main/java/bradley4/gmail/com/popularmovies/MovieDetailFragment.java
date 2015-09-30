@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -41,8 +43,11 @@ public class MovieDetailFragment extends Fragment {
     private TextView mRating;
     private TextView mOverview;
     private ImageView mPosterImage;
+    private Button mFavoriteButton;
+
     public ListView mGridTrailerView;
     public ListView mGridReviewView;
+
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -107,6 +112,7 @@ public class MovieDetailFragment extends Fragment {
         mRating = (TextView) view.findViewById(R.id.textRating);
         mOverview = (TextView) view.findViewById(R.id.textOverview);
         mPosterImage = (ImageView) view.findViewById(R.id.imageViewPoster);
+        mFavoriteButton = (Button) view.findViewById(R.id.favorite_button);
 
         mTitle.setText(mMovieItem.getTitle());
         try{
@@ -128,6 +134,16 @@ public class MovieDetailFragment extends Fragment {
 
         fetchMovieTrailerTask(mMovieItem.getID());
         fetchMovieReviewTask(mMovieItem.getID());
+
+        //favorite Section
+        Context context = getActivity();
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                getString(R.string.favorite_shared_preference), Context.MODE_PRIVATE);
+
+        int defaultValue = getResources().getInteger();
+        long highScore = sharedPref.getClass();
+        //(getString(R.string.saved_high_score), defaultValue);
+
 
         return view;
     }

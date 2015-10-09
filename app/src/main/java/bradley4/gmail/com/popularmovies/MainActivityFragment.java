@@ -1,6 +1,6 @@
 package bradley4.gmail.com.popularmovies;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;

@@ -1,7 +1,7 @@
 package bradley4.gmail.com.popularmovies;
 
 import android.app.Activity;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -94,9 +94,10 @@ public class MovieDetailFragment extends Fragment {
         }
 
         Intent intent = getActivity().getIntent();
+        if (intent == null || intent.getData() == null){
+            return;
+        }
         mMovieItem = (MovieItem) intent.getSerializableExtra(Constant.DETAIL_INTENT);
-
-
 
     }
 

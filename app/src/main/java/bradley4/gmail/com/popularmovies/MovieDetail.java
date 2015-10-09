@@ -2,11 +2,11 @@ package bradley4.gmail.com.popularmovies;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MovieDetail extends ActionBarActivity implements MovieDetailFragment.OnFragmentInteractionListener {
+public class MovieDetail extends AppCompatActivity implements MovieDetailFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

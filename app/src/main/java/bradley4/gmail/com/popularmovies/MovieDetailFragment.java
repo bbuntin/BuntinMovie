@@ -116,6 +116,10 @@ public class MovieDetailFragment extends Fragment {
         mPosterImage = (ImageView) view.findViewById(R.id.imageViewPoster);
         mFavoriteButton = (Button) view.findViewById(R.id.favorite_button);
 
+        if (mMovieItem == null){
+            return view;
+        }
+
         mTitle.setText(mMovieItem.getTitle());
         try{
             String[] movieDate = mMovieItem.getRelease_date().split("-");

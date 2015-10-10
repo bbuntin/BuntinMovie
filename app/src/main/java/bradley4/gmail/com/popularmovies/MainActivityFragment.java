@@ -1,5 +1,6 @@
 package bradley4.gmail.com.popularmovies;
 
+import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -22,9 +23,26 @@ import bradley4.gmail.com.popularmovies.business.FetchMovieTask;
  */
 public class MainActivityFragment extends Fragment {
 
+    OnFragmentInteractionListener mCallback;
+
     public GridView mGridView;
 
     public MainActivityFragment() {
+    }
+
+    public interface OnFragmentInteractionListener {
+        public void onVideoSelected(int position);
+    }
+
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+
+        try{
+            mCallback = (OnFragmentInteractionListener) activity;
+        }catch (ClassCastException e){
+            throw new ClassCastException(activity.toString + " must implement OnFragmentInteractionListener")
+        }
     }
 
     @Override

@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class MainActivity extends AppCompatActivity implements MovieDetailFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements MainActivityFragment.OnFragmentInteractionListener {
 
     private static final String DETAILFRAGMENT_TAG = "DFTAG";
     private boolean mTwoPane;
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements MovieDetailFragme
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onVideoSelected(int position) {
         Log.e("test", "test");
     }
 }

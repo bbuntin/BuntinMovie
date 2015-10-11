@@ -29,14 +29,6 @@ import bradley4.gmail.com.popularmovies.business.FetchMovieReviewTask;
 import bradley4.gmail.com.popularmovies.business.FetchMovieTrailerTask;
 import bradley4.gmail.com.popularmovies.model.MovieItem;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MovieDetailFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MovieDetailFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MovieDetailFragment extends Fragment {
     private static MovieItem mMovieItem;
     private TextView mTitle;
@@ -61,21 +53,9 @@ public class MovieDetailFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MovieDetailFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MovieDetailFragment newInstance(MovieItem movieItem) {
+    public static final MovieDetailFragment newInstance(MovieItem movieItem) {
         MovieDetailFragment fragment = new MovieDetailFragment();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
-        mMovieItem = movieItem;
+        fragment.mMovieItem = movieItem;
         return fragment;
     }
 
@@ -224,7 +204,7 @@ public class MovieDetailFragment extends Fragment {
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
-        }*/
+        }      }*/
     }
 
     @Override

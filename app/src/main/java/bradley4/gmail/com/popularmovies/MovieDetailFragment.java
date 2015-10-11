@@ -38,14 +38,13 @@ import bradley4.gmail.com.popularmovies.model.MovieItem;
  * create an instance of this fragment.
  */
 public class MovieDetailFragment extends Fragment {
-    private MovieItem mMovieItem;
+    private static MovieItem mMovieItem;
     private TextView mTitle;
     private TextView mDate;
     private TextView mRating;
     private TextView mOverview;
     private ImageView mPosterImage;
     private Button mFavoriteButton;
-
     public ListView mGridTrailerView;
     public ListView mGridReviewView;
 
@@ -71,12 +70,12 @@ public class MovieDetailFragment extends Fragment {
      * @return A new instance of fragment MovieDetailFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MovieDetailFragment newInstance(String param1, String param2) {
+    public static MovieDetailFragment newInstance(MovieItem movieItem) {
         MovieDetailFragment fragment = new MovieDetailFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+
         fragment.setArguments(args);
+        mMovieItem = movieItem;
         return fragment;
     }
 
@@ -220,12 +219,12 @@ public class MovieDetailFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        try {
+        /*try {
             mListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
-        }
+        }*/
     }
 
     @Override

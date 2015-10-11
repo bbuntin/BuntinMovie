@@ -16,6 +16,7 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import bradley4.gmail.com.popularmovies.business.FetchMovieTask;
+import bradley4.gmail.com.popularmovies.model.MovieItem;
 
 
 /**
@@ -23,15 +24,14 @@ import bradley4.gmail.com.popularmovies.business.FetchMovieTask;
  */
 public class MainActivityFragment extends Fragment {
 
-    OnFragmentInteractionListener mCallback;
-
+    public OnFragmentInteractionListener mCallback;
     public GridView mGridView;
 
     public MainActivityFragment() {
     }
 
     public interface OnFragmentInteractionListener {
-        public void onVideoSelected(int position);
+        public void onVideoSelected(MovieItem movieItem);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class MainActivityFragment extends Fragment {
         try{
             mCallback = (OnFragmentInteractionListener) activity;
         }catch (ClassCastException e){
-            throw new ClassCastException(activity.toString + " must implement OnFragmentInteractionListener")
+            throw new ClassCastException(activity.toString() + " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -93,7 +93,7 @@ public class MainActivityFragment extends Fragment {
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
         if (isConnected) {
-            FetchMovieTask movieTask = new FetchMovieTask(getActivity(), mGridView);
+            FetchMovieTask movieTask = new FetchMovieTask(getActivity(), mGridView, mCallback);
             movieTask.execute(sortBy);
         }else{
             Toast toast = Toast.makeText(getActivity(), Constant.PLEASE_CONNECT, Toast.LENGTH_LONG);

@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import bradley4.gmail.com.popularmovies.model.MovieItem;
+
 
 public class MainActivity extends AppCompatActivity implements MainActivityFragment.OnFragmentInteractionListener {
 
@@ -49,7 +51,11 @@ public class MainActivity extends AppCompatActivity implements MainActivityFragm
     }
 
     @Override
-    public void onVideoSelected(int position) {
-        Log.e("test", "test");
+    public void onVideoSelected(MovieItem movieItem) {
+        if (mTwoPane){
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.detail_container, new MovieDetailFragment(movieItem))
+                    .commit();
+        }
     }
 }

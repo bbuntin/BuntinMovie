@@ -25,6 +25,7 @@ import java.net.URL;
 import java.util.Map;
 
 import bradley4.gmail.com.popularmovies.Constant;
+import bradley4.gmail.com.popularmovies.MainActivityFragment;
 import bradley4.gmail.com.popularmovies.MovieDetail;
 import bradley4.gmail.com.popularmovies.R;
 import bradley4.gmail.com.popularmovies.adapter.ImageAdapter;
@@ -35,12 +36,14 @@ public class FetchMovieTask extends AsyncTask<String, Void, MovieItem[]> {
     private final String LOG_TAG = FetchMovieTask.class.getSimpleName();
     public Context mContext;
     public GridView mGridView;
+    public MainActivityFragment.OnFragmentInteractionListener mCallback;
     public ProgressDialog mProgressDialog;
 
 
-    public FetchMovieTask(Context context,GridView gridView){
+    public FetchMovieTask(Context context,GridView gridView, MainActivityFragment.OnFragmentInteractionListener callback){
         this.mContext = context;
         this.mGridView = gridView;
+        this.mCallback = callback;
         mProgressDialog = new ProgressDialog(mContext);
     }
 
@@ -164,10 +167,11 @@ public class FetchMovieTask extends AsyncTask<String, Void, MovieItem[]> {
             @Override
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                Intent intent = new Intent(mContext, MovieDetail.class);
+                //Intent intent = new Intent(mContext, MovieDetail.class);
                 MovieItem movieItem = result[position];
-                intent.putExtra(Constant.DETAIL_INTENT, movieItem);
-                mContext.startActivity(intent);
+                mCallback.onVideoSelected(movieItem);
+                //intent.putExtra(Constant.DETAIL_INTENT, movieItem);
+                //mContext.startActivity(intent);
             }
         });
         //mProgressDialog.dismiss();

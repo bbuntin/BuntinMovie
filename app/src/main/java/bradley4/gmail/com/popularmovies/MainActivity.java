@@ -1,9 +1,7 @@
 package bradley4.gmail.com.popularmovies;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -53,8 +51,14 @@ public class MainActivity extends AppCompatActivity implements MainActivityFragm
     @Override
     public void onVideoSelected(MovieItem movieItem) {
         if (mTwoPane){
+
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(Constant.DETAIL_INTENT, movieItem);
+            MovieDetailFragment fragment = new MovieDetailFragment();
+            fragment.setArguments(bundle);
+
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.detail_container, new MovieDetailFragment(movieItem))
+                    .add(R.id.detail_container, fragment)
                     .commit();
         }
     }

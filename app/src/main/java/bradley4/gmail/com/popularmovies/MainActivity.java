@@ -50,9 +50,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityFragm
     }
 
     @Override
-    public void onVideoSelected(MovieItem movieItem) {
+    public void onVideoSelected(MovieItem movieItem, Boolean initialLoad) {
         if (mTwoPane){
-
             Bundle bundle = new Bundle();
             bundle.putSerializable(Constant.DETAIL_INTENT, movieItem);
             MovieDetailFragment fragment = new MovieDetailFragment();
@@ -63,9 +62,11 @@ public class MainActivity extends AppCompatActivity implements MainActivityFragm
                     .commit();
         }else
         {
-            Intent intent = new Intent(this, MovieDetail.class);
-            intent.putExtra(Constant.DETAIL_INTENT, movieItem);
-            this.startActivity(intent);
+            if (!initialLoad) {
+                Intent intent = new Intent(this, MovieDetail.class);
+                intent.putExtra(Constant.DETAIL_INTENT, movieItem);
+                this.startActivity(intent);
+            }
         }
     }
 }

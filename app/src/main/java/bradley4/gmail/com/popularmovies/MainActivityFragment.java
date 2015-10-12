@@ -31,7 +31,7 @@ public class MainActivityFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        public void onVideoSelected(MovieItem movieItem);
+        public void onVideoSelected(MovieItem movieItem, Boolean initialLoad);
     }
 
     @Override

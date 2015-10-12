@@ -27,7 +27,7 @@
             android:paddingTop="10dp"
             android:paddingLeft="15dp"
             android:id="@+id/textTitle"
-            android:text="Large Text"
+            android:text=""
             android:singleLine="true"
             />
 
@@ -56,7 +56,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rating"
+                android:text=""
                 android:id="@+id/textRating"
                 android:layout_below="@+id/textDate"
                 android:layout_toRightOf="@+id/imageViewPoster"
@@ -67,7 +67,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Year"
+                android:text=""
                 android:id="@+id/textDate"
                 android:layout_alignTop="@+id/imageViewPoster"
                 android:layout_toRightOf="@+id/imageViewPoster"
@@ -78,7 +78,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mark as Favorite"
+                android:text=""
                 android:id="@+id/favorite_button"
                 android:layout_below="@+id/textRating"
                 android:layout_toRightOf="@+id/imageViewPoster"
@@ -91,7 +91,7 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Overview"
+                android:text=""
                 android:id="@+id/textView"
                 android:paddingTop="2dp"
                 android:paddingRight="8dp"
@@ -102,7 +102,7 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Overview"
+                android:text=""
                 android:id="@+id/textOverview"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
@@ -116,7 +116,7 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Trailers and Teasers"
+                android:text=""
                 android:id="@+id/trailer_header_textview"
                 android:paddingTop="2dp"
                 android:paddingRight="8dp"
@@ -138,7 +138,7 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Reviews"
+                android:text=""
                 android:id="@+id/reviews_textview"
                 android:paddingTop="2dp"
                 android:paddingRight="8dp"

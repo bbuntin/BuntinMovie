@@ -1,9 +1,7 @@
 package bradley4.gmail.com.popularmovies.business;
 
-import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -26,7 +24,6 @@ import java.util.Map;
 
 import bradley4.gmail.com.popularmovies.Constant;
 import bradley4.gmail.com.popularmovies.MainActivityFragment;
-import bradley4.gmail.com.popularmovies.MovieDetail;
 import bradley4.gmail.com.popularmovies.R;
 import bradley4.gmail.com.popularmovies.adapter.ImageAdapter;
 import bradley4.gmail.com.popularmovies.model.MovieItem;
@@ -167,13 +164,11 @@ public class FetchMovieTask extends AsyncTask<String, Void, MovieItem[]> {
             @Override
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                //Intent intent = new Intent(mContext, MovieDetail.class);
                 MovieItem movieItem = result[position];
-                mCallback.onVideoSelected(movieItem);
-                //intent.putExtra(Constant.DETAIL_INTENT, movieItem);
-                //mContext.startActivity(intent);
+                mCallback.onVideoSelected(movieItem, false);
             }
         });
+        mCallback.onVideoSelected(result[0], true);
         //mProgressDialog.dismiss();
     }
 }

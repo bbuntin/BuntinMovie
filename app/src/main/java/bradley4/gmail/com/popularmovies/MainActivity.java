@@ -1,5 +1,6 @@
 package bradley4.gmail.com.popularmovies;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -58,8 +59,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityFragm
             fragment.setArguments(bundle);
 
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.detail_container, fragment)
+                    .replace(R.id.detail_container, fragment)
                     .commit();
+        }else
+        {
+            Intent intent = new Intent(this, MovieDetail.class);
+            intent.putExtra(Constant.DETAIL_INTENT, movieItem);
+            this.startActivity(intent);
         }
     }
 }

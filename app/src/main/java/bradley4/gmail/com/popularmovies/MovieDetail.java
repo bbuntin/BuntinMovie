@@ -2,16 +2,28 @@ package bradley4.gmail.com.popularmovies;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MovieDetail extends ActionBarActivity implements MovieDetailFragment.OnFragmentInteractionListener {
+import bradley4.gmail.com.popularmovies.model.MovieItem;
+
+public class MovieDetail extends AppCompatActivity implements MovieDetailFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
+
+        MovieItem movieItem = (MovieItem)getIntent().getSerializableExtra(Constant.DETAIL_INTENT);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Constant.DETAIL_INTENT, movieItem);
+        MovieDetailFragment fragment = new MovieDetailFragment();
+        fragment.setArguments(bundle);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.detail_container, fragment)
+                .commit();
     }
 
     @Override

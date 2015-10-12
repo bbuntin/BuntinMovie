@@ -2,15 +2,10 @@ package bradley4.gmail.com.popularmovies.business;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
-
-import com.google.gson.Gson;
+import android.widget.ListView;
 
 import org.json.JSONException;
 
@@ -20,85 +15,63 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Map;
 
 import bradley4.gmail.com.popularmovies.Constant;
-import bradley4.gmail.com.popularmovies.MainActivityFragment;
-import bradley4.gmail.com.popularmovies.R;
-import bradley4.gmail.com.popularmovies.adapter.ImageAdapter;
-import bradley4.gmail.com.popularmovies.model.MovieItem;
+import bradley4.gmail.com.popularmovies.adapter.ReviewAdapter;
+import bradley4.gmail.com.popularmovies.model.ReviewItem;
 
-public class FetchMovieTask extends AsyncTask<String, Void, MovieItem[]> {
+public class FetchMovieReviewTask extends AsyncTask<String, Void, ReviewItem[]> {
 
-    private final String LOG_TAG = FetchMovieTask.class.getSimpleName();
+    private final String LOG_TAG = FetchMovieReviewTask.class.getSimpleName();
     public Context mContext;
-    public GridView mGridView;
-    public MainActivityFragment.OnFragmentInteractionListener mCallback;
+    public ListView mListView;
     public ProgressDialog mProgressDialog;
 
 
-    public FetchMovieTask(Context context,GridView gridView, MainActivityFragment.OnFragmentInteractionListener callback){
+    public FetchMovieReviewTask(Context context, ListView listView){
         this.mContext = context;
-        this.mGridView = gridView;
-        this.mCallback = callback;
+        this.mListView = listView;
         mProgressDialog = new ProgressDialog(mContext);
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        mProgressDialog.setMessage(Constant.GETTING_MOVIES);
-       // mProgressDialog.show(); //comment out for now. Only shows for a split second and looks odd
+        //mProgressDialog.setMessage(Constant.GETTING_MOVIES);
+        //mProgressDialog.show(); //comment out for now. Only shows for a split second and looks odd
 
     }
 
     @Override
-    protected MovieItem[] doInBackground(String... params) {
+    protected ReviewItem[] doInBackground(String... params) {
         // These two need to be declared outside the try/catch
         // so that they can be closed in the finally block.
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
-        MovieItem[] movies = null;
+        ReviewItem[] reviews = null;
 
         String movieJsonStr = null;
-
-        String param1 = params[0];
-        if (param1 == Constant.DISPLAY_FAVORITES){
-
-            SharedPreferences sharedPref = mContext.getSharedPreferences(
-                    mContext.getString(R.string.favorite_shared_preference), Context.MODE_PRIVATE);
-
-            Map<String,?> keys = sharedPref.getAll();
-            Gson gson = new Gson();
-            MovieItem[] movieItems;
-            movieItems = new MovieItem[sharedPref.getAll().size()];
-            int index = 0;
-            for(Map.Entry<String,?> entry : keys.entrySet()){
-                Log.d("map values",entry.getKey() + ": " +
-                        entry.getValue().toString());
-                MovieItem movieItem = gson.fromJson(entry.getValue().toString(), MovieItem.class);
-                movieItems[index] = movieItem;
-                index = index + 1;
-            }
-            return movieItems;
-        }
 
         try {
             // Construct the URL for the OpenWeatherMap query
             // Possible parameters are available at OWM's forecast API page, at
             // http://openweathermap.org/API#forecast
 
-            final String MOVIE_BASE = "http://api.themoviedb.org/3/discover/movie?";
-            final String SORT_BY = "sort_by";
+            String movie_base_url = "http://api.themoviedb.org/3/movie/%s/reviews?";
             final String API_KEY = "api_key";
 
-            Uri builtUri = Uri.parse(MOVIE_BASE).buildUpon()
-                    .appendQueryParameter(SORT_BY, param1)
+            String movieID = params[0];
+            movie_base_url = String.format(movie_base_url, movieID);
+
+            Log.i(LOG_TAG, movie_base_url.toString());
+
+
+            Uri builtUri = Uri.parse(movie_base_url).buildUpon()
                     .appendQueryParameter(API_KEY, Constant.API_STRING)
             .build();
 
             URL url = new URL(builtUri.toString());
-            Log.i(LOG_TAG,builtUri.toString());
+
 
 
             //Create the request to OpenWeatherMap, and open the connection
@@ -130,7 +103,7 @@ public class FetchMovieTask extends AsyncTask<String, Void, MovieItem[]> {
             }
             movieJsonStr = buffer.toString();
             try {
-                movies = MovieDBJsonParser.getParsedMovies(movieJsonStr);
+                reviews = MovieReviewDBJsonParser.getParsedMovieReviews(movieJsonStr);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -152,21 +125,21 @@ public class FetchMovieTask extends AsyncTask<String, Void, MovieItem[]> {
                 }
             }
         }
-        return movies;
+        return reviews;
     }
 
     @Override
-    protected void onPostExecute(final MovieItem[] result) {
-        mGridView.setAdapter(new ImageAdapter(mContext, result));
-        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    protected void onPostExecute(final ReviewItem[] result) {
+        mListView.setAdapter(new ReviewAdapter(mContext, result));
+        /**
+         * mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                MovieItem movieItem = result[position];
-                mCallback.onVideoSelected(movieItem, false);
+                ReviewItem reviewItem = result[position];
+                mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constant.YOUTUBE_URL + trailerItem.getmKey())));
             }
-        });
-        mCallback.onVideoSelected(result[0], true);
+        });**/
         //mProgressDialog.dismiss();
     }
 }

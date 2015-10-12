@@ -1,6 +1,7 @@
 package bradley4.gmail.com.popularmovies;
 
-import android.app.Fragment;
+import android.app.Activity;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -15,6 +16,7 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import bradley4.gmail.com.popularmovies.business.FetchMovieTask;
+import bradley4.gmail.com.popularmovies.model.MovieItem;
 
 
 /**
@@ -22,19 +24,35 @@ import bradley4.gmail.com.popularmovies.business.FetchMovieTask;
  */
 public class MainActivityFragment extends Fragment {
 
+    public OnFragmentInteractionListener mCallback;
     public GridView mGridView;
 
     public MainActivityFragment() {
+    }
+
+    public interface OnFragmentInteractionListener {
+        public void onVideoSelected(MovieItem movieItem, Boolean initialLoad);
+    }
+
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+
+        try{
+            mCallback = (OnFragmentInteractionListener) activity;
+        }catch (ClassCastException e){
+            throw new ClassCastException(activity.toString() + " must implement OnFragmentInteractionListener");
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        mGridView = (GridView) rootView.findViewById(R.id.gridview);
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        mGridView = (GridView) view.findViewById(R.id.gridview);
         fetchMovieTask(Constant.SORT_BY_POPULARITY);
-        return rootView;
+        return view;
     }
 
     @Override
@@ -52,11 +70,14 @@ public class MainActivityFragment extends Fragment {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_by_rating) {
             fetchMovieTask(Constant.SORT_BY_RATING);
-
         }
 
         if (id == R.id.order_by_popular) {
             fetchMovieTask(Constant.SORT_BY_POPULARITY);
+        }
+
+        if (id == R.id.action_by_favorite){
+            fetchMovieTask(Constant.DISPLAY_FAVORITES);
         }
 
         return super.onOptionsItemSelected(item);
@@ -72,7 +93,7 @@ public class MainActivityFragment extends Fragment {
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
         if (isConnected) {
-            FetchMovieTask movieTask = new FetchMovieTask(getActivity(), mGridView);
+            FetchMovieTask movieTask = new FetchMovieTask(getActivity(), mGridView, mCallback);
             movieTask.execute(sortBy);
         }else{
             Toast toast = Toast.makeText(getActivity(), Constant.PLEASE_CONNECT, Toast.LENGTH_LONG);

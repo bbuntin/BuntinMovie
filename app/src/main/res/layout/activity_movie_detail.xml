@@ -1,11 +1,7 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detail_container"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="bradley4.gmail.com.popularmovies.MovieDetail">
-
-    <fragment android:name="bradley4.gmail.com.popularmovies.MovieDetailFragment"
-        android:id="@+id/main_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-</RelativeLayout>
+    tools:context="bradley4.gmail.com.popularmovies.MovieDetail"
+    tools:ignore="MergeRootFrame" />

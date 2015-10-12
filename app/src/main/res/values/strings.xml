@@ -3,11 +3,17 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="action_refresh" translatable="false">Refresh</string>
-    <string name="action_most_popluar" translatable="false">Order by Most Popular</string>
+    <string name="action_most_popular" translatable="false">Order by Most Popular</string>
     <string name="action_highest_rating" translatable="false">Order by Highest Rated</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_movie_detail">MovieDetail</string>
+
+    <string name="favorite_shared_preference">bradley4.gmail.com.popularmovies.shared_preferences_favorite</string>
+    <string name="favorite_shared_preference_prefix">fav</string>
+    <string name="favorite_button_mark">Mark as Favorite</string>
+    <string name="favorite_button_unmark">Favorited</string>
+    <string name="action_favorite">Display Favorites</string>
 </resources>

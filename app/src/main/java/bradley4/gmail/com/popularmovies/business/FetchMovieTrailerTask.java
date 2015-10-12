@@ -62,7 +62,6 @@ public class FetchMovieTrailerTask extends AsyncTask<String, Void, TrailerItem[]
 
             String movie_base_url = "http://api.themoviedb.org/3/movie/%s/videos?";
             final String API_KEY = "api_key";
-            final String API_KEY_VALUE = "460ad9e6a622c1e1ff1552540628b972";
 
             String movieID = params[0];
             movie_base_url = String.format(movie_base_url, movieID);
@@ -71,7 +70,7 @@ public class FetchMovieTrailerTask extends AsyncTask<String, Void, TrailerItem[]
 
 
             Uri builtUri = Uri.parse(movie_base_url).buildUpon()
-                    .appendQueryParameter(API_KEY, API_KEY_VALUE)
+                    .appendQueryParameter(API_KEY, Constant.API_STRING)
             .build();
 
             URL url = new URL(builtUri.toString());

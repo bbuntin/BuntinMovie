@@ -16,6 +16,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import bradley4.gmail.com.popularmovies.Constant;
 import bradley4.gmail.com.popularmovies.adapter.ReviewAdapter;
 import bradley4.gmail.com.popularmovies.model.ReviewItem;
 
@@ -58,16 +59,15 @@ public class FetchMovieReviewTask extends AsyncTask<String, Void, ReviewItem[]> 
 
             String movie_base_url = "http://api.themoviedb.org/3/movie/%s/reviews?";
             final String API_KEY = "api_key";
-            final String API_KEY_VALUE = "460ad9e6a622c1e1ff1552540628b972";
 
             String movieID = params[0];
             movie_base_url = String.format(movie_base_url, movieID);
 
-            Log.i(LOG_TAG,movie_base_url.toString());
+            Log.i(LOG_TAG, movie_base_url.toString());
 
 
             Uri builtUri = Uri.parse(movie_base_url).buildUpon()
-                    .appendQueryParameter(API_KEY, API_KEY_VALUE)
+                    .appendQueryParameter(API_KEY, Constant.API_STRING)
             .build();
 
             URL url = new URL(builtUri.toString());
